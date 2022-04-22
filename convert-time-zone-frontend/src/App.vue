@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class= "diplay-current-time">
-      <p>{{showDateTime}}</p>
+      <p>{{showDate}} {{showTime}}</p>
     </div>
     <header>
       <h1>{{timeZoneConverterHeader}}</h1>
@@ -19,7 +19,8 @@ export default {
 
   data(){
     return {
-      showDateTime: '',
+      showDate: '',
+      showTime: '',
       selectedValue: null,
       timeZoneConverterHeader: 'TIME ZONE CONVERTER'
     }
@@ -27,7 +28,8 @@ export default {
 
   methods: {
     getCurrentDateTime(){
-      this.showDateTime = new Date().toLocaleString();
+      this.showDate = new Date().toLocaleDateString(); 
+      this.showTime = new Date().toLocaleTimeString(); 
     }
   },
 
@@ -115,5 +117,23 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+.box{
+  width: 20%;
+  height: 100px;
+  border: 1px solid black;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.date-show{
+  width: 50%;
+  height: 100px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 40px;
 }
 </style>

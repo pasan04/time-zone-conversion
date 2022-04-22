@@ -9,16 +9,12 @@ with open('timezone.json') as f:
 def getAllTimeZones():
     return d
 
-def getCurrentTime(currentTime,timeZone):
-    currentTimeZone = timeZone
+def getCurrentTime(currentTimeZone,selectedTimeZone):
     data = d['timeZones']
     for x in data:
         if(x['id'] == currentTimeZone):
-            selectedTimeZone = x['name']
-    datetimenow = currentTime
+            x['name'] = selectedTimeZone
     time1 = datetime.now(pytz.timezone('US/Eastern'))
-    time2 = datetime.now(pytz.timezone('Europe/London'))
     print(time1)
-    print(time2)
     # for tz in pytz.all_timezones:
     #     print(tz)

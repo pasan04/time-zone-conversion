@@ -6,10 +6,21 @@
         </select>
         <button type="button" style="background: rgb(0,100,0); padding: 1rem; border-radius: 0.3rem; border: rgb(0,100,0); margin-right: 20px; margin-top: 5px;color: white; width:300px" @click="submitTimeZoneConversion">SUBMIT</button>
     </div>
+    <div class="form-inline">
+      <div class="box">
+        <p style="margin: 20px; font-size: 30px;">13:55 PM</p>
+      </div>
+    </div>
+    <div class="form-inline">
+      <p style="margin: 20px; font-size: 30px;">21st of March 2022</p>
+    </div>
+    <div class="form-inline">
+      <p style="margin: 20px; font-size: 30px;">Time Zone ({{selectedTimeZone}})</p>
+    </div>
 </template>
-
-
 <script>
+
+
 export default {
   data() {
     return {
@@ -51,6 +62,8 @@ export default {
           'Access-Control-Allow-Origin': '*'
       },
         body: JSON.stringify(object)
+      }).then((response)=>{
+          console.log(response);
       });
     }
   },
