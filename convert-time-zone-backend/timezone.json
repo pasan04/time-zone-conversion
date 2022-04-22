@@ -1,0 +1,32 @@
+{
+    "timeZones": [
+        {
+            "id": "1",
+            "name": "US/Eastern"
+        },
+        {
+            "id": "2",
+            "name": "US/Central"
+        },
+        {
+            "id": "3",
+            "name": "Europe/London"
+        },
+        {
+            "id": "4",
+            "name": "Europe/Amsterdam"
+        },
+        {
+            "id": "5",
+            "name": "Asia/Tokyo"
+        },
+        {
+            "id": "6",
+            "name": "Asia/Jakarta"
+        },
+        {
+            "id": "7",
+            "name": "UTC"
+        }
+    ]
+}
