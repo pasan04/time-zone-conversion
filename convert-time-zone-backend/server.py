@@ -2,12 +2,13 @@ from time import time
 from flask import Flask, jsonify, request,json
 from flask_cors import CORS
 from flask_restful import Api, Resource
+from nbformat import current_nbformat
 from pyparsing import null_debug_action
 import app.controller as controller
 
 app = Flask(__name__)
-CORS(app)
-api = Api(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 class PostResource(Resource):
     def get(self):
@@ -21,14 +22,19 @@ def getAllTimeZones():
 #get the current time
 @app.route('/api/getcurrentzonetime',methods = ['POST'])
 def getCurrentTime():
-    content = request.get_json()
-    print(content)
+    content = request.get_json(force=True)
     currentTimeZone = content['currentTimeZone']
     selectedTimeZone = content['selectTimeZone']
-    print(currentTimeZone)
-    print(selectedTimeZone)
-    controller.getCurrentTime("pasam","1")
-    return 'ppp'
+    currentDateAndTime = controller.getCurrentTime(currentTimeZone, selectedTimeZone)
+    selectedTimeZoneName = controller.getSelectedTimeZone(selectedTimeZone)
+    convertedDate = currentDateAndTime.strftime("%a, %b %d, %Y")
+    convertedTime = currentDateAndTime.strftime("%I:%M:%S %p")
+    convertedDateTime = {
+        "convertedTime": convertedTime,
+        "convertedDate": convertedDate,
+        "selectedTimeZone": selectedTimeZoneName
+    }
+    return jsonify(convertedDateTime)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8080, debug=True)

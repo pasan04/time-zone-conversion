@@ -1,6 +1,6 @@
 <template>
     <div class="form-inline">
-        <select style="background: #282c34; padding: 1rem; border-radius: 0.3rem; color: white; margin-right: 20px; border: #282c34; width:300px;" v-model="selectedTimeZone">
+        <select style="background: #282c34; padding: 1rem; border-radius: 0.3rem; color: white; margin-right: 20px; border: #282c34; width:300px; " v-model="selectedTimeZone">
           <option selected disabled>Select Time Zone</option>
           <option v-for="(item, index) in allTimeZones" :value="item.id" :key="index">{{ item.name }}</option>
         </select>
@@ -8,25 +8,29 @@
     </div>
     <div class="form-inline">
       <div class="box">
-        <p style="margin: 20px; font-size: 30px;">13:55 PM</p>
+        <p style="margin: 20px; font-size: 30px;">{{selectedTime}}</p>
       </div>
     </div>
     <div class="form-inline">
-      <p style="margin: 20px; font-size: 30px;">21st of March 2022</p>
+      <p style="margin: 20px; font-size: 30px;">{{selectedDate}}</p>
     </div>
     <div class="form-inline">
-      <p style="margin: 20px; font-size: 30px;">Time Zone ({{selectedTimeZone}})</p>
+      <p style="margin: 20px; font-size: 30px;">Time Zone ({{selectedDateAndTime.selectedTimeZone}})</p>
     </div>
 </template>
-<script>
 
+<script>
+import axios from 'axios';
 
 export default {
   data() {
     return {
       allTimeZones: [],
       selectedTimeZone: 'Select Time Zone',
-      isLoading: false
+      isLoading: false,
+      selectedDateAndTime: '',
+      selectedDate: '',
+      selectedTime: ''
     };
   },
   methods: {
@@ -50,21 +54,25 @@ export default {
     },
     submitTimeZoneConversion(){
       const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const object = {
+      const currentDateAndTime = {
         currentTimeZone: currentTimezone,
         selectTimeZone: this.selectedTimeZone
       }
-      fetch('http://localhost:8080/api/getcurrentzonetime',{
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-      },
-        body: JSON.stringify(object)
-      }).then((response)=>{
-          console.log(response);
+      axios.post('http://localhost:8080/api/getcurrentzonetime',currentDateAndTime)
+      .then(response =>{
+          this.selectedDateAndTime = response.data;
+          this.selectedDateTimeRun(response.data.convertedDate+ ' '+ response.data.convertedTime);
+      }).catch(error =>{
+          console.log(error);
       });
+    },
+    selectedDateTimeRun(dateTime){
+      setInterval(() => {
+        console.log(dateTime)
+        // const d = new Date(dateTime);
+        this.selectedDate = new Date().toLocaleDateString(); 
+        this.selectedTime = new Date().toLocaleTimeString(); 
+      }, 1000)
     }
   },
   mounted(){

@@ -1,3 +1,4 @@
+from select import select
 from time import time
 import pytz
 from datetime import datetime
@@ -11,10 +12,17 @@ def getAllTimeZones():
 
 def getCurrentTime(currentTimeZone,selectedTimeZone):
     data = d['timeZones']
+    selectedTimeZoneName = ''
     for x in data:
-        if(x['id'] == currentTimeZone):
-            x['name'] = selectedTimeZone
-    time1 = datetime.now(pytz.timezone('US/Eastern'))
-    print(time1)
-    # for tz in pytz.all_timezones:
-    #     print(tz)
+        if(x['id'] == selectedTimeZone):
+            selectedTimeZoneName= x['name'] 
+    currentDateAndTime = datetime.now(pytz.timezone(selectedTimeZoneName))
+    return currentDateAndTime
+
+def getSelectedTimeZone(currentTimeZoneVal):
+    data = d['timeZones']
+    selectedTimeZoneName = ''
+    for x in data:
+        if(x['id'] == currentTimeZoneVal):
+            selectedTimeZoneName= x['name'] 
+    return selectedTimeZoneName

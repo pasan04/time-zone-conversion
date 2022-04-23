@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class= "diplay-current-time">
-      <p>{{showDate}} {{showTime}}</p>
+      <p>Your Time Zone : {{currentTimezone}}  |  {{showDate}} {{showTime}}</p>
     </div>
     <header>
       <h1>{{timeZoneConverterHeader}}</h1>
@@ -22,6 +22,7 @@ export default {
       showDate: '',
       showTime: '',
       selectedValue: null,
+      currentTimezone: '',
       timeZoneConverterHeader: 'TIME ZONE CONVERTER'
     }
   },
@@ -34,6 +35,7 @@ export default {
   },
 
   created(){
+    this.currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setInterval(() => {
       this.getCurrentDateTime();
     }, 1000)
