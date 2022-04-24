@@ -122,13 +122,13 @@ header {
 }
 
 .box{
-  width: 20%;
-  height: 100px;
+  width: 40%;
+  height: 60px;
   border: 1px solid black;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .date-show{
