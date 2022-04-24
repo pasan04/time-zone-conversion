@@ -1,24 +1,23 @@
-# convert-time-zone
+# Convert-time-zone-frontend
 
-## Project setup
+Get a clone from this repository and go to convert-time-zone-frontend folder. 
+Required: Node.js in your machine.
+
+### Project setup
+Install all the node modules to your project. 
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+After succesfully installed all the node modules, can run the project project using following command. 
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
+If need to deploy the frontend to any other platform, use this command. 
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The frontend project will run on : http://localhost:8080
