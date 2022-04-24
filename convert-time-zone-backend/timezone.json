@@ -10,27 +10,43 @@
         },
         {
             "id": "3",
-            "name": "Europe/London"
+            "name": "US/Alaska"
         },
         {
             "id": "4",
-            "name": "Europe/Amsterdam"
+            "name": "US/Aleutian"
         },
         {
             "id": "5",
-            "name": "Asia/Tokyo"
+            "name": "US/Arizona"
         },
         {
             "id": "6",
-            "name": "Asia/Jakarta"
+            "name": "US/Central"
         },
         {
             "id": "7",
-            "name": "UTC"
+            "name": "US/East-Indiana"
         },
         {
             "id": "8",
-            "name": "NTC"
+            "name": "Europe/Paris"
+        },
+        {
+            "id": "9",
+            "name": "Asia/Jakarta"
+        },
+        {
+            "id": "10",
+            "name": "Canada/Central"
+        },
+        {
+            "id": "11",
+            "name": "Asia/Colombo"
+        },
+        {
+            "id": "12",
+            "name": "Africa/Luanda"
         }
     ]
 }

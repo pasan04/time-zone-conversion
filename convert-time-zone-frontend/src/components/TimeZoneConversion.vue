@@ -1,10 +1,10 @@
 <template>
     <div class="form-inline">
-        <select style="background: #282c34; padding: 1rem; border-radius: 0.3rem; color: white; border: #282c34; width:300px;margin-left: 15px; " v-model="selectedTimeZone">
+        <select style="background: #282c34; padding: 1rem; border-radius: 0.3rem; color: white; border: #282c34; width:300px; margin-left: 5px;" v-model="selectedTimeZone">
           <option selected disabled>Select Time Zone</option>
-          <option v-for="(item, index) in allTimeZones" :value="item.id" :key="index">{{ item.name }}</option>
+          <option v-for="(item, index) in allTimeZones" :value="item.id" :key="index" :disabled="!isLoadedTimeZones">{{ item.name }}</option>
         </select>
-        <button type="button" style="background: rgb(0,100,0); padding: 1rem; border-radius: 0.3rem; border: rgb(0,100,0); margin-left: 15px; margin-top: 5px;color: white; width:300px" @click="submitTimeZoneConversion">SUBMIT</button>
+        <button type="button" style="background: rgb(0,100,0); padding: 1rem; border-radius: 0.3rem; border: rgb(0,100,0); margin-left: 5px; margin-top: 5px;color: white; width:300px" @click="submitTimeZoneConversion">SUBMIT</button>
     </div>
     <div v-if="isLoadedSelectedTimeZone">
       <div class="form-inline">

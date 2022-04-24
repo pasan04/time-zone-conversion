@@ -2,7 +2,6 @@ from time import time
 from flask import Flask, jsonify, request,json
 from flask_cors import CORS
 from flask_restful import Api, Resource
-from nbformat import current_nbformat
 from pyparsing import null_debug_action
 import app.controller as controller
 
