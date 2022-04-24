@@ -122,7 +122,7 @@ header {
 }
 
 .box{
-  width: 40%;
+  width: 55%;
   height: 60px;
   border: 1px solid black;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -137,6 +137,13 @@ header {
   border-radius: 10px;
   margin: auto;
   margin-top: 40px;
+}
+
+.welcome{
+  height: 60px;
+  margin: auto;
+  margin-top: 10%;
+  text-align: center;
 }
 
 </style>

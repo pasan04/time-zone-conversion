@@ -6,7 +6,12 @@
         </select>
         <button type="button" style="background: rgb(0,100,0); padding: 1rem; border-radius: 0.3rem; border: rgb(0,100,0); margin-left: 5px; margin-top: 5px;color: white; width:300px" @click="submitTimeZoneConversion">SUBMIT</button>
     </div>
-    <div v-if="isLoadedSelectedTimeZone">
+    <div class="welcome" v-if="isLoadingSelectedTimeZone">
+      <div class="form-inline">
+          <p style="margin-top:10px; font-size: 25px; font-weight: bold;">{{welcomeMsg}}</p>
+      </div>
+    </div>
+    <div v-if="!isLoadingSelectedTimeZone">
       <div class="form-inline">
         <div class="box">
           <div class="form-inline">
@@ -31,10 +36,11 @@ import * as constants from '../shared/constant';
 export default {
   data() {
     return {
+      welcomeMsg: 'WELCOME TO TIMEZONE CONVERTER',
       allTimeZones: [],
       selectedTimeZone: 'Select Time Zone',
       isLoadedTimeZones: false,
-      isLoadedSelectedTimeZone: false,
+      isLoadingSelectedTimeZone: true,
       selectedDateAndTime: '',
       selectedDate: '',
       selectedTime: '',
@@ -45,11 +51,9 @@ export default {
   methods: {
     loadTimeZones() {
       this.isLoadedTimeZones = false;
-      fetch(constants.url+'/api/getalltimezones')
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
+      axios.get(constants.url+'/api/getalltimezones')
+        .then(res =>{
+          let data = res.data;
           this.isLoadedTimeZones = true;
           const results = [];
           for (const i in data.timeZones) {
@@ -59,19 +63,25 @@ export default {
             });
           }
           this.allTimeZones = results;
+        }).catch(error =>{
+            console.log(error);
         });
     },
     submitTimeZoneConversion(){
-      this.isLoadedSelectedTimeZone = false;
+      this.isLoadingSelectedTimeZone = true;
       const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const currentDateAndTime = {
         currentTimeZone: currentTimezone,
         selectTimeZone: this.selectedTimeZone
       }
-      axios.post(constants.url+'/api/getcurrentzonetime',currentDateAndTime)
-      .then(response =>{
+      const headers = {
+            'Content-Type': 'text/plain'
+      };
+      axios.post(constants.url+'/api/getcurrentzonetime',currentDateAndTime,
+      {headers}
+      ).then(response =>{
           this.selectedDateAndTime = response.data;
-          this.isLoadedSelectedTimeZone = true;
+          this.isLoadingSelectedTimeZone = false;
           if(this.alreadyRunningTime){
             clearInterval(this.stopRunTimeEvent);
             this.selectedDateTimeRun(response.data.convertedDate+ ' '+ response.data.convertedTime);
