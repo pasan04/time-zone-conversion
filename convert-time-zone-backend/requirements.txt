@@ -2,3 +2,4 @@ Flask==2.0.2
 Flask-RESTful==0.3.9
 Flask-Cors==1.10.2
 pytz==2021.3
+requests ==2.27.1

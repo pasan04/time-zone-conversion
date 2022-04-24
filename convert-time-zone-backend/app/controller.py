@@ -7,10 +7,12 @@ import json
 with open('timezone.json') as f:
     d = json.load(f)
 
+#Get all the timezones defined in json file
 def getAllTimeZones():
     return d
 
-def getCurrentTime(currentTimeZone,selectedTimeZone):
+#Get the current time
+def getCurrentTime(selectedTimeZone):
     data = d['timeZones']
     selectedTimeZoneName = ''
     for x in data:
@@ -19,6 +21,7 @@ def getCurrentTime(currentTimeZone,selectedTimeZone):
     currentDateAndTime = datetime.now(pytz.timezone(selectedTimeZoneName))
     return currentDateAndTime
 
+#Get the selected time zone which sends the name of it extract from json
 def getSelectedTimeZone(currentTimeZoneVal):
     data = d['timeZones']
     selectedTimeZoneName = ''

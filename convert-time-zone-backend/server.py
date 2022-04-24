@@ -13,18 +13,17 @@ class PostResource(Resource):
     def get(self):
         return {'data' : 'Get Request'}
 
-#Get all the timezones
+#Get all the timezones api
 @app.route('/api/getalltimezones', methods =['GET'])
 def getAllTimeZones():
     return jsonify(controller.getAllTimeZones())
 
-#get the current time
+#get the current time api
 @app.route('/api/getcurrentzonetime',methods = ['POST'])
 def getCurrentTime():
     content = request.get_json(force=True)
-    currentTimeZone = content['currentTimeZone']
     selectedTimeZone = content['selectTimeZone']
-    currentDateAndTime = controller.getCurrentTime(currentTimeZone, selectedTimeZone)
+    currentDateAndTime = controller.getCurrentTime(selectedTimeZone)
     selectedTimeZoneName = controller.getSelectedTimeZone(selectedTimeZone)
     convertedDate = currentDateAndTime.strftime("%a, %b %d, %Y")
     convertedTime = currentDateAndTime.strftime("%I:%M:%S %p")

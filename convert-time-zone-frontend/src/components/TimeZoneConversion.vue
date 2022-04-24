@@ -69,9 +69,7 @@ export default {
     },
     submitTimeZoneConversion(){
       this.isLoadingSelectedTimeZone = true;
-      const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const currentDateAndTime = {
-        currentTimeZone: currentTimezone,
         selectTimeZone: this.selectedTimeZone
       }
       const headers = {
