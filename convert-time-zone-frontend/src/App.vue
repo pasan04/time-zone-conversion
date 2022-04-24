@@ -97,7 +97,7 @@ header {
   margin: 2rem auto;
   border-radius: 10px;
   padding: 1rem;
-  background-color: white;
+  background-color: 	#87CEEB;
   color: black;
   text-align: center;
   width: 80%;

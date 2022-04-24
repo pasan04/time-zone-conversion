@@ -15,12 +15,14 @@
       <p style="margin: 20px; font-size: 30px;">{{selectedDate}}</p>
     </div>
     <div class="form-inline">
-      <p style="margin: 20px; font-size: 30px;">Time Zone ({{selectedDateAndTime.selectedTimeZone}})</p>
+      <p style="margin: 20px; font-size: 30px; font-weight: bold;">Selected Time Zone - {{selectedDateAndTime.selectedTimeZone}}</p>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
+import * as constants from '../shared/constant';
 
 export default {
   data() {
@@ -30,13 +32,15 @@ export default {
       isLoading: false,
       selectedDateAndTime: '',
       selectedDate: '',
-      selectedTime: ''
+      selectedTime: '',
+      alreadyRunningTime: false,
+      stopRunTimeEvent: '',
     };
   },
   methods: {
     loadTimeZones() {
       this.isLoading = true;
-      fetch('http://localhost:8080/api/getalltimezones')
+      fetch(constants.url+'/api/getalltimezones')
         .then((response) => {
             return response.json();
         })
@@ -58,21 +62,30 @@ export default {
         currentTimeZone: currentTimezone,
         selectTimeZone: this.selectedTimeZone
       }
-      axios.post('http://localhost:8080/api/getcurrentzonetime',currentDateAndTime)
+      axios.post(constants.url+'/api/getcurrentzonetime',currentDateAndTime)
       .then(response =>{
           this.selectedDateAndTime = response.data;
-          this.selectedDateTimeRun(response.data.convertedDate+ ' '+ response.data.convertedTime);
+          if(this.alreadyRunningTime){
+            clearInterval(this.stopRunTimeEvent);
+            this.selectedDateTimeRun(response.data.convertedDate+ ' '+ response.data.convertedTime);
+          }else{
+            this.selectedDateTimeRun(response.data.convertedDate+ ' '+ response.data.convertedTime);
+          }
       }).catch(error =>{
           console.log(error);
       });
     },
-    selectedDateTimeRun(dateTime){
-      setInterval(() => {
-        console.log(dateTime)
-        // const d = new Date(dateTime);
-        this.selectedDate = new Date().toLocaleDateString(); 
-        this.selectedTime = new Date().toLocaleTimeString(); 
+    selectedDateTimeRun(selectedDateAndTime){
+      this.alreadyRunningTime = true;
+      let date = new Date(selectedDateAndTime);
+      this.stopRunTimeEvent = setInterval(() => {
+        date = new Date(date.getTime() + 1000);
+        this.selectedDate = new Date(date).toLocaleDateString(); 
+        this.selectedTime = new Date(date).toLocaleTimeString(); 
       }, 1000)
+    },
+    moment: function () {
+      return moment();
     }
   },
   mounted(){
