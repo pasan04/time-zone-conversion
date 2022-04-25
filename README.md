@@ -1,10 +1,10 @@
 # Time Zone Converter Application
 
-This is a small app to convert time zones using _python3 flask and vuejs_.You can convert your current time to different time zone with a touch. 
+This is a small app to convert time zones using _python3 flask and vuejs_. You can convert your current time to different time zone using this app.
 Main features of the application,
-   - Get the inserted time zones from the backend and display
-   - Display the current time and it's name
-   - Display the different time zone's date, time and it's name.
+   - Get the inserted time zones and display
+   - Display the current time and time zone name
+   - Display the different time zone date, time and time zone name.
 
 If you like to add more time zones, you just need to add it to the json file which is in convert-time-zone-backend project's timezone.json file.
    ```
@@ -27,11 +27,10 @@ If you like to add more time zones, you just need to add it to the json file whi
    ```
 ## Libraries used
 
-Out of many, there are two libraries used to developed this application.
+Specially, there are two libraries used to develop this application.
 
 ### Pytz
 This Python library allows cross platform timezone calculations using Python 2.4 or higher.
-
 ex :-
    ```
    import pytz
@@ -63,7 +62,17 @@ ex :-
          console.log(error);
      });
   ```
-
+  
+## Testing
+Used python standard library module _unittest_ to write test cases and test it. This helped to find bugs in the program.
+  ex :-
+   ```
+    #test the get all time zones API sends a status code 200
+    def test_1_get_all_timeZones_statusCode(self):
+        r = requests.get(ApiTest.ALL_TIMEZONE_URL)
+        self.assertEqual(r.status_code, 200)
+   ```   
+   
 ## Deployement
 
 Python flask app is hosted on the AWS EC2 instance. You can access the live endpoint using following url.
