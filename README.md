@@ -81,7 +81,8 @@ Python flask app is hosted on the AWS EC2 instance. You can access the live endp
    ```
 Frontend with vuejs is in an apache server(cPanel) and assigned a domain name to it.
 
-You can access the live timezoneconverter app using this url : http://timezoneconverter.cf/
+You can access the live timezoneconverter app using this url : http://timezoneconverter.cf/ 
+(I disconnected the backend which is hosted in the AWS EC2 due to billing issues, If you want, you can run the application locally)
 
 Let's have a look, how you can deploy this on your local machine. 
 
